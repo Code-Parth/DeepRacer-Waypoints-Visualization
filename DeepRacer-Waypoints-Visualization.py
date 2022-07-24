@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Name Of your Map
-track_name = "AWS_track"
+track_name = "2022_june_open"
 
 # Folder Path Where Your .NPY Files are saved
 absolute_path = "./Maps-Waypoints-NPY-Files/"
