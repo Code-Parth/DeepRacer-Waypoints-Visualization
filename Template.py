@@ -2,16 +2,17 @@ def reward_function(params):
 
     center_variance = params["distance_from_center"] / params["track_width"]
 
-    left_lane = []     # Fill in the waypoints
-    
-    center_lane = []     # Fill in the waypoints
-    
-    right_lane = []     # Fill in the waypoints
-    
-    fast = []     # Fill in the waypoints
-    slow = []     # Fill in the waypoints
-    
-    reward = 21
+    # racing line
+    left_lane = []  # Fill in the waypoints
+    center_lane = []  # Fill in the waypoints
+    right_lane = []  # Fill in the waypoints
+
+    # Speed
+    fast = []  # 3
+    moderate = []  # 2
+    slow = []  # 1
+
+    reward = 30
 
     if params["all_wheels_on_track"]:
         reward += 10
@@ -26,16 +27,21 @@ def reward_function(params):
         reward += 10
     else:
         reward -= 10
+
     if params["closest_waypoints"][1] in fast:
-        if params["speed"] == 2 :
+        if params["speed"] > 1.5:
+            reward += 10
+        else:
+            reward -= 10
+    elif params["closest_waypoints"][1] in moderate:
+        if params["speed"] > 1 and params["speed"] <= 1.5:
             reward += 10
         else:
             reward -= 10
     elif params["closest_waypoints"][1] in slow:
-        if params["speed"] == 1 :
+        if params["speed"] <= 1:
             reward += 10
         else:
             reward -= 10
-        
-    
+            
     return float(reward)
